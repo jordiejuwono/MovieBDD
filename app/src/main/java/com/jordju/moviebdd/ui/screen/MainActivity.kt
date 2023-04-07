@@ -1,4 +1,4 @@
-package com.jordju.moviebdd
+package com.jordju.moviebdd.ui.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
