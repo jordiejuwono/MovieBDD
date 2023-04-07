@@ -24,7 +24,7 @@ object MovieMapper {
                 id = result?.id ?: 0,
                 originalTitle = result?.originalTitle ?: "",
                 overview = result?.overview ?: "",
-                posterPath = result?.posterPath ?: "",
+                posterPath = "https://image.tmdb.org/t/p/w500/${result?.posterPath ?: ""}",
                 releaseDate = result?.releaseDate ?: "",
                 title = result?.title ?: "",
                 voteAverage = result?.voteAverage ?: 0.0,

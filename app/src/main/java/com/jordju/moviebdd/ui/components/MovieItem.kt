@@ -6,8 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.jordju.moviebdd.ui.theme.MovieBDDTheme
 
@@ -29,8 +31,18 @@ fun MovieItem(
         )
         Spacer(modifier = Modifier.width(8.dp))
         Column() {
-            Text(text = movieTitle, fontWeight = FontWeight.Bold)
-            Text(text = movieDescription, maxLines = 3)
+            Text(
+                text = movieTitle,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = movieDescription,
+                maxLines = 3,
+                fontSize = 14.sp,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }
