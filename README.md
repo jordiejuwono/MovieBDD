@@ -22,3 +22,5 @@ I want the app to show error after 2 minutes if there is no connection or if the
 Given the customer doesn't have connectivity<br />
 When the customer requests to see Top Rated Movies list<br />
 The app should display the error message on screen<br />
+
+### **Flowchart**
