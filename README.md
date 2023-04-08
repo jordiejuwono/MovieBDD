@@ -30,6 +30,10 @@ The app should display the error message on screen
 ### **Flowchart**
 <img src="https://user-images.githubusercontent.com/95727832/230703826-d3288388-821e-49e1-b0b3-6f2d13fafbd6.png" width="400" height="550">
 
+### **App Architecture**
+<img src="https://user-images.githubusercontent.com/95727832/230704949-e14186d5-eedd-45ac-8e22-710d6a34eed4.png" width="400" height="550">
+
+
 ### **Payload contract**
 ```
 GET movie/top_rated
