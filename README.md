@@ -24,3 +24,4 @@ When the customer requests to see Top Rated Movies list<br />
 The app should display the error message on screen<br />
 
 ### **Flowchart**
+![Flowchart](https://user-images.githubusercontent.com/95727832/230703753-2000e0c0-6e1f-4f33-889f-3d3b022a570f.png)
