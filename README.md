@@ -5,10 +5,13 @@ Top Rated Movie List with BDD Specs
 ### **Story: Customer requests to see Top Rated Movies List**
 
 ### **Narrative #1**
+```css
+background-color: #f4f4f4;
+```
 As an online customer<br />
 I want the app to show Top Rated Movies List<br />
 So i can always see which Movies currently have the best Rating<br />
-
+```
 **Scenarios (Acceptance criteria)**<br />
 Given the customer has connectivity<br />
 When the customer open the app and requests to see Top Rated Movies list<br />
