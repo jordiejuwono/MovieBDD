@@ -1,6 +1,5 @@
 package com.jordju.moviebdd.domain.entities
 
-import com.google.gson.annotations.SerializedName
 
 data class Movie(
     var backdropPath: String,

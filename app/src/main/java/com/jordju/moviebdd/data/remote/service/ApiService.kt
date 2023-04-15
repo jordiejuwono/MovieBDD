@@ -18,23 +18,22 @@ interface ApiService {
         @Query("page") page: Int = 1
     ): MovieListResponse
 
-    companion object {
-        @JvmStatic
-        operator fun invoke(chuckerInterceptor: ChuckerInterceptor): ApiService {
-            val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(chuckerInterceptor)
-                .connectTimeout(120, TimeUnit.SECONDS)
-                .readTimeout(120, TimeUnit.SECONDS)
-                .build()
-
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build()
-
-            return retrofit.create(ApiService::class.java)
-        }
-    }
+//    companion object {
+//        operator fun invoke(chuckerInterceptor: ChuckerInterceptor): ApiService {
+//            val okHttpClient = OkHttpClient.Builder()
+//                .addInterceptor(chuckerInterceptor)
+//                .connectTimeout(120, TimeUnit.SECONDS)
+//                .readTimeout(120, TimeUnit.SECONDS)
+//                .build()
+//
+//            val retrofit = Retrofit.Builder()
+//                .baseUrl("https://api.themoviedb.org/3/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .client(okHttpClient)
+//                .build()
+//
+//            return retrofit.create(ApiService::class.java)
+//        }
+//    }
 
 }
