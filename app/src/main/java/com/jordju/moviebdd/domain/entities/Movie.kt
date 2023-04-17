@@ -1,6 +1,5 @@
 package com.jordju.moviebdd.domain.entities
 
-
 data class Movie(
     var backdropPath: String,
     var id: Int,

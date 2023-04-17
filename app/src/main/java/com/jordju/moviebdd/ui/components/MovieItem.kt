@@ -1,9 +1,14 @@
 package com.jordju.moviebdd.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -25,12 +30,16 @@ fun MovieItem(
             model = imageUrl,
             contentDescription = movieTitle,
             modifier = Modifier
-                .width(80.dp)
-                .height(120.dp)
-                .padding(3.dp)
+                .width(90.dp)
+                .fillMaxHeight()
+                .clip(RoundedCornerShape(8.dp)),
+            contentScale = ContentScale.Crop
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Column() {
+        Column(
+            modifier = Modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.Center
+        ) {
             Text(
                 text = movieTitle,
                 fontWeight = FontWeight.Bold,
@@ -41,7 +50,8 @@ fun MovieItem(
                 text = movieDescription,
                 maxLines = 3,
                 fontSize = 14.sp,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = Color.Gray
             )
         }
     }
