@@ -65,7 +65,7 @@ object AppModules {
     }
 
     private val viewModelModule = module {
-        viewModel { MainViewModel(get()) }
+        viewModel { MainViewModel(get(), get(), get()) }
     }
 
     private val useCaseModule = module {

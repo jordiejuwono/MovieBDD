@@ -48,17 +48,19 @@ fun MovieContent(
     viewModel: MainViewModel = koinViewModel()
 ) {
 
-    LaunchedEffect(viewModel.movieState) {
-        viewModel.getTopRatedMovies()
+    LaunchedEffect(Unit) {
+        viewModel.getAllMovies()
     }
 
-    val movieState by viewModel.movieState.collectAsState()
+    val movieState = viewModel.getAllMovies().collectAsState(initial = Resource.Loading())
+
+    val upcomingMovies by viewModel.upcomingState.collectAsState()
 
     var headerMovie by remember {
         mutableStateOf<Movie?>(null)
     }
 
-    movieState.let { uiState ->
+    movieState.value.let { uiState ->
         when (uiState) {
             is Resource.Loading -> {
                 Column(
@@ -70,7 +72,7 @@ fun MovieContent(
                 }
             }
             is Resource.Success -> {
-                val moviesResult = movieState.data
+                val moviesResult = upcomingMovies.data
                 if (headerMovie == null && (moviesResult?.results?.isNotEmpty() == true)) {
                     headerMovie = moviesResult.results.random()
                 }
