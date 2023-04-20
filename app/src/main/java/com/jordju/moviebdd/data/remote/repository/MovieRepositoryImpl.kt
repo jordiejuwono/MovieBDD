@@ -21,4 +21,24 @@ class MovieRepositoryImpl(private val dataSource: MovieRemoteDataSource, private
             emit(Resource.Error(e.message))
         }
     }.flowOn(Dispatchers.IO)
+
+    override suspend fun getNowPlayingMovieList(): Flow<Resource<MovieList>> = flow {
+        try {
+            dataSource.getNowPlayingMovieList().collect { result ->
+                emit(Resource.Success(mapper.mapMovieListResponseToEntity(result)))
+            }
+        } catch (e: Exception) {
+            emit(Resource.Error(e.message))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun getUpcomingMovieList(): Flow<Resource<MovieList>> = flow {
+        try {
+            dataSource.getUpcomingMovieList().collect { result ->
+                emit(Resource.Success(mapper.mapMovieListResponseToEntity(result)))
+            }
+        } catch (e: Exception) {
+            emit(Resource.Error(e.message))
+        }
+    }.flowOn(Dispatchers.IO)
 }

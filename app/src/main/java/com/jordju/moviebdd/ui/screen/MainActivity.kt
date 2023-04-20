@@ -71,7 +71,6 @@ fun MovieContent(
             }
             is Resource.Success -> {
                 val moviesResult = movieState.data
-
                 if (headerMovie == null && (moviesResult?.results?.isNotEmpty() == true)) {
                     headerMovie = moviesResult.results.random()
                 }
