@@ -10,4 +10,5 @@ import kotlinx.coroutines.flow.flow
 class GetTopRatedMoviesUseCase(private val repository: MovieRepository) {
 
     suspend fun execute(): Flow<Resource<MovieList>> = repository.getTopRatedMoviesList()
+
 }

@@ -7,7 +7,9 @@ import com.jordju.moviebdd.data.remote.mapper.MovieMapper
 import com.jordju.moviebdd.data.remote.repository.MovieRepositoryImpl
 import com.jordju.moviebdd.data.remote.service.ApiService
 import com.jordju.moviebdd.domain.repository.MovieRepository
+import com.jordju.moviebdd.domain.usecase.GetNowPlayingMoviesUseCase
 import com.jordju.moviebdd.domain.usecase.GetTopRatedMoviesUseCase
+import com.jordju.moviebdd.domain.usecase.GetUpcomingMoviesUseCase
 import com.jordju.moviebdd.ui.screen.MainViewModel
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -68,6 +70,8 @@ object AppModules {
 
     private val useCaseModule = module {
         single { GetTopRatedMoviesUseCase(get()) }
+        single { GetNowPlayingMoviesUseCase(get()) }
+        single { GetUpcomingMoviesUseCase(get()) }
     }
 
 }

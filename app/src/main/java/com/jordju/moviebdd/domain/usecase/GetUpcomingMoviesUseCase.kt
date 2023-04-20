@@ -5,8 +5,8 @@ import com.jordju.moviebdd.domain.entities.MovieList
 import com.jordju.moviebdd.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetNowPlayingMoviesUseCase(private val repository: MovieRepository) {
+class GetUpcomingMoviesUseCase(private val repository: MovieRepository) {
 
-    suspend fun execute(): Flow<Resource<MovieList>> = repository.getNowPlayingMovieList()
+    suspend fun execute(): Flow<Resource<MovieList>> = repository.getUpcomingMovieList()
 
 }
