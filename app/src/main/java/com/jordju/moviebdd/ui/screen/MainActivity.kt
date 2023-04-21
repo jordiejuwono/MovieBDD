@@ -5,7 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -13,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -55,6 +58,8 @@ fun MovieContent(
     val movieState = viewModel.getAllMovies().collectAsState(initial = Resource.Loading())
 
     val upcomingMovies by viewModel.upcomingState.collectAsState()
+    val topRatedMovies by viewModel.topRatedState.collectAsState()
+    val nowPlayingMovies by viewModel.nowPlayingState.collectAsState()
 
     var headerMovie by remember {
         mutableStateOf<Movie?>(null)
@@ -72,30 +77,47 @@ fun MovieContent(
                 }
             }
             is Resource.Success -> {
-                val moviesResult = upcomingMovies.data
-                if (headerMovie == null && (moviesResult?.results?.isNotEmpty() == true)) {
-                    headerMovie = moviesResult.results.random()
+                val topRatedResults = topRatedMovies.data
+                val upcomingResults = upcomingMovies.data
+                val nowPlayingResults = nowPlayingMovies.data
+
+                if (headerMovie == null && (topRatedResults?.results?.isNotEmpty() == true)) {
+                    headerMovie = topRatedResults.results.random()
                 }
 
                 LazyColumn {
-                    moviesResult?.let { movieList ->
-                        item {
-                            headerMovie?.let { MovieHeader(movieItem = it) }
-                        }
-                        item {
-                            MovieTitle(title = "Top Rated")
-                        }
-                        items(movieList.results) { movie ->
-                            movie.let {
-                                MovieItem(
-                                    imageUrl = it.posterPath,
-                                    movieTitle = it.originalTitle,
-                                    movieDescription = it.overview,
-                                    modifier = Modifier
-                                        .padding(4.dp)
-                                        .height(120.dp)
-                                )
+                    item {
+                        headerMovie?.let { MovieHeader(movieItem = it) }
+                    }
+                    item {
+                        MovieTitle(title = "Now Playing")
+                    }
+                    item {
+                        LazyRow(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            contentPadding = PaddingValues(8.dp)
+                        ) {
+                            nowPlayingResults?.results?.let {
+                                items(it) { movie ->
+                                    HorizontalMovieItem(
+                                        imageUrl = movie.posterPath,
+                                        movieTitle = movie.originalTitle
+                                    )
+                                }
                             }
+                        }
+                    }
+                    item {
+                        MovieTitle(title = "Upcoming Movies")
+                    }
+                    upcomingResults?.results?.let {
+                        items(it) { movie ->
+                            MovieItem(
+                                imageUrl = movie.posterPath,
+                                movieTitle = movie.originalTitle,
+                                movieDescription = movie.overview,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp).height(130.dp)
+                            )
                         }
                     }
                 }
@@ -149,4 +171,25 @@ fun MovieTitle(title: String) {
         fontSize = 22.sp,
         modifier = Modifier.padding(4.dp)
     )
+}
+
+@Composable
+fun HorizontalMovieItem(imageUrl: String, movieTitle: String) {
+    Column(
+        modifier = Modifier
+            .height(240.dp)
+            .width(120.dp)
+    ) {
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = movieTitle,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp)
+                .clip(RoundedCornerShape(8.dp)),
+            contentScale = ContentScale.Crop
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(movieTitle, maxLines = 2, overflow = TextOverflow.Ellipsis)
+    }
 }
